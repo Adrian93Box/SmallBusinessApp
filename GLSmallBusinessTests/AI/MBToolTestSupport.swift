@@ -54,7 +54,8 @@ enum MBToolHarness {
 
     /// One call, as the loop makes it. `onDevice` passes the on-device output budget (1,200).
     static func run(_ box: MBToolbox, _ name: String, _ arguments: GLAIJSON, onDevice: Bool = false) async -> GLAIToolOutcome {
-        let toolbox = onDevice ? box.onDevice : box.online
+        // One toolbox for every AI, online and offline; on device only the output budget differs.
+        let toolbox = box.online
         guard let tool = toolbox.executor(named: name) else {
             Issue.record("\(name) is not bound (\(onDevice ? "on device" : "online"))")
             return .failure(GLAIFailure(reason: "unbound", message: "", personReason: GLAIStrings.notAvailableHere))

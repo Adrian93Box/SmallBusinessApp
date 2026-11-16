@@ -163,6 +163,8 @@ struct GLSmallBusinessApp: App {
         // GoldLifeCloud's one road. Unset = GoldLifeUI makes no request at all.
         GLRemoteData.fetchData = { try await GLCloudTransport.fetchPublicData(from: $0) }
         GLAISystemBannersConfig.bannerBuilder = { AnyView(MBSystemBannerInset()) }
+        GLAISystemBannersConfig.isBannerActive = { MBSystemBannerInset.isShowing }
+        AIAppKnowledge.resolvedLanguageCodeProvider = { MBLocalization.resolvedLanguageCode }
         GLCloudPlaidClient.setEntitlementJWSProvider {
             let sub = await MainActor.run { SubscriptionManager.shared }
             return await sub.entitlementJWS()
@@ -274,7 +276,10 @@ struct GLSmallBusinessApp: App {
                         Task { await goldLifeAuth.resolve() }
                     }
                 }
-                .onOpenURL { _ = GoldLifeID.shared.handleOpenURL($0) }
+                .onOpenURL { url in
+                    if PlaidOAuthResumeStore.shared.handleUniversalLink(url) { return }
+                    _ = GoldLifeID.shared.handleOpenURL(url)
+                }
                 // The app-switcher cover is GLPrivacyShield (registered above) —
                 // a window above `.alert` level, so it covers presented sheets
                 // too. Deliberately NOT an overlay here.

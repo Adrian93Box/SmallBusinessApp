@@ -25,14 +25,19 @@ final class BackupRowHonestyUITests: GLUITestCase {
                       "a store that never synced showed a backup time. \(app.visibleSummary())")
         saveProof("C22-backup-row-before-edit")
 
-        // One real edit, folded into the outbox by the Menu's sign-out count (local, no network).
+        // One real edit inside Settings → Branding & Documents, folded into the outbox by Menu's sign-out count.
+        let brandingRow = app.buttons["settings_category_branding_documents"]
+        XCTAssertTrue(app.scrollUntilHittable(brandingRow), "Settings should show Branding & Documents category row. \(app.visibleSummary())")
+        brandingRow.tap()
+
         let toggle = app.switches["Show address on documents"]
-        XCTAssertTrue(app.scrollUntilHittable(toggle), "Settings should show the address toggle. \(app.visibleSummary())")
+        XCTAssertTrue(app.scrollUntilHittable(toggle), "Branding & Documents should show the address toggle. \(app.visibleSummary())")
         let before = toggle.value as? String
         toggle.switches.firstMatch.exists ? toggle.switches.firstMatch.tap() : toggle.tap()
         let flipped = NSPredicate(format: "value != %@", before ?? "")
         XCTAssertEqual(XCTWaiter.wait(for: [expectation(for: flipped, evaluatedWith: toggle)], timeout: 5), .completed,
                        "the switch did not change (was \(before ?? "nil")). \(app.visibleSummary())")
+        app.navigationBars.buttons.firstMatch.tap()
         app.navigationBars.buttons.firstMatch.tap()
         app.tapMenuRow("Sign out")
         let alert = app.alerts.firstMatch

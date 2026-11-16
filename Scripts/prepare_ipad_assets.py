@@ -4,13 +4,16 @@ import shutil
 import sys
 from PIL import Image
 
-sys.path.append('/Users/adriangutierrez/Documents/Github/AI-Tools/website-kit')
+_REPO_APP = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+_REPOS_ROOT = os.path.dirname(_REPO_APP)
+_AI_TOOLS = os.path.join(_REPOS_ROOT, 'AI-Tools/website-kit')
+sys.path.append(_AI_TOOLS)
 from frame_screenshots import load_frame, compose, web_width
 
-ASSETS_DIR = '/Users/adriangutierrez/Documents/Github/SmallBusinessApp/AppStoreAssets/iPadAssets'
-SCREENSHOTS_DIR = '/Users/adriangutierrez/Documents/Github/softwarebygl-website/public/screenshots'
-FRAME_PATH = '/Users/adriangutierrez/Documents/Github/AI-Tools/website-kit/frames/ipad-pro-13-landscape.png'
-BRAND_DIR = '/Users/adriangutierrez/Documents/Github/AI-Tools/website-kit/appstore/brand-assets'
+ASSETS_DIR = os.path.join(_REPO_APP, 'AppStoreAssets/iPadAssets')
+SCREENSHOTS_DIR = os.path.join(_REPOS_ROOT, 'softwarebygl-website/public/screenshots')
+FRAME_PATH = os.path.join(_AI_TOOLS, 'frames/ipad-pro-13-landscape.png')
+BRAND_DIR = os.path.join(_AI_TOOLS, 'appstore/brand-assets')
 
 os.makedirs(ASSETS_DIR, exist_ok=True)
 

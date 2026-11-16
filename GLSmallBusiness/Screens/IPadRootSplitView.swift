@@ -28,6 +28,10 @@ struct RootView: View {
     /// One router for the whole app: the Contacts segment (and future deep links) live here,
     /// shared by both shells so the state survives a shell swap.
     @State private var router = AppRouter()
+    /// A bank that sent the person back to the app (Plaid OAuth) while no Money screen was
+    /// showing. The Money screens finish the connection, so the app goes there by itself:
+    /// warm return, or a cold launch after iOS closed the app (the store restores it).
+    @ObservedObject private var plaidResume = PlaidOAuthResumeStore.shared
 
     var body: some View {
         #if DEBUG
@@ -48,6 +52,9 @@ struct RootView: View {
         // the fix is one tap away. A one-shot alert at the root was a nag with nowhere to go.
         chrome
             .environment(router)
+            .onChange(of: plaidResume.resumeSession != nil, initial: true) { _, isWaiting in
+                if isWaiting { _ = router.navigateToRootScreen("money") }
+            }
             // No .glDemoBanner() here: SampleDataHost (GatePhase.swift) mounts it
             // once around whichever root is active — a second mount here drew the
             // banner twice, stacked.
@@ -307,84 +314,33 @@ struct IPadRootSplitView: View {
     // MARK: - Sidebar (sections)
 
     private var sidebar: some View {
-        List {
-            ForEach(AppSection.allCases.filter { $0 != .assistant || MBFeatureFlags.assistantEnabled }) { item in
-                Button {
-                    section = item
-                } label: {
-                    HStack {
-                        Label(item.title, systemImage: item.systemImage)
-                            .font(.glBody.weight(section == item ? .semibold : .regular))
-                            .foregroundStyle(GLTheme.textPrimary)
-                        Spacer()
-                        if item == .money && !subscription.isMoneyEntitled {
-                            HStack(spacing: 3) {
-                                Image(systemName: "lock.fill")
-                                    .font(.system(size: 8))
-                                Text("PRO")
-                                    .font(.system(size: 9, weight: .bold))
-                            }
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Capsule().fill(GLTheme.accent.opacity(0.18)))
-                            .foregroundStyle(GLTheme.accent)
-                        }
+        GLPadSidebar(
+            title: mbLoc("My Business"),
+            items: AppSection.allCases.filter { $0 != .assistant || MBFeatureFlags.assistantEnabled },
+            selection: $section,
+            onMenuTap: { showingMenu = true },
+            isBannerActive: false,
+            avatar: { MenuButtonLabel() }
+        ) { item, isSelected in
+            HStack {
+                Label(item.title, systemImage: item.systemImage)
+                    .font(.glBody.weight(isSelected ? .semibold : .regular))
+                    .foregroundStyle(GLTheme.textPrimary)
+                Spacer()
+                if item == .money && !subscription.isMoneyEntitled {
+                    HStack(spacing: 3) {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 8))
+                        Text("PRO")
+                            .font(.system(size: 9, weight: .bold))
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(GLTheme.accent.opacity(0.18)))
+                    .foregroundStyle(GLTheme.accent)
                 }
-                .buttonStyle(.plain)
-                .listRowBackground(
-                    Group {
-                        if section == item {
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(GLTheme.menuGoldSelectedRowFill)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                        .strokeBorder(GLTheme.menuGoldBorder, lineWidth: 1)
-                                )
-                        } else {
-                            Color.clear
-                        }
-                    }
-                )
             }
         }
-        .navigationTitle(GLScript.padded(mbLoc("My Business")))
-        .toolbarTitleDisplayMode(.large)   // leading-aligned title now the top-leading button is gone
-        .contentMargins(.top, GLScript.titleClearance(for: GLScript.padded(mbLoc("My Business"))), for: .scrollContent)
-        .glGoldSidebarSkin()
-        // App-level Menu now lives at the bottom of the sidebar as a clearly-labeled control,
-        // not a bare monogram in the nav bar (which read as decoration, not a button).
-        .safeAreaInset(edge: .bottom) { sidebarMenuButton }
-    }
-
-    private var sidebarMenuButton: some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .fill(GLTheme.menuGoldBorder)
-                .frame(height: 1)
-            Button { showingMenu = true } label: {
-                HStack(spacing: 14) {
-                    MenuButtonLabel()
-                        .padding(.leading, 2)
-                    Text("Menu")
-                        .font(.headline)
-                        .foregroundStyle(GLTheme.textPrimary)
-                        .lineLimit(1)
-                    Spacer(minLength: 0)
-                    Image(systemName: "chevron.forward")
-                        .font(.glCaption.weight(.semibold))
-                        .foregroundStyle(GLTheme.textTertiary)
-                }
-                .padding(.horizontal, GLLayout.rowContentPadding)
-                .padding(.vertical, 12)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Menu and settings")
-        }
-        .background(GLTheme.menuGoldCardFill)
     }
 
     // MARK: - Content (the list for the selected section)

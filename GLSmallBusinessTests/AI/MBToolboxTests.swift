@@ -18,14 +18,19 @@ import GoldLifeAI
 @MainActor
 struct MBToolboxTests {
 
-    @Test func bothManifestsLoadFromTheAppBundle() throws {
+    /// One catalog (owner ruling 2026-11-15): the app ships ONE manifest, and no second,
+    /// on-device copy of the tool list.
+    @Test func theOneManifestLoadsFromTheAppBundle() throws {
         let box = try MBToolboxHarnessStore.toolbox()
         #expect(box.online.manifest.toolset == MBToolbox.toolset)
-        #expect(box.onDevice.manifest.toolset == MBToolbox.toolset)
-        #expect(!box.online.manifest.isOnDevice)
-        #expect(box.onDevice.manifest.isOnDevice)
         #expect(box.online.manifest.tools.count == 45)
-        #expect(Set(box.onDevice.manifest.tools.map(\.name)) == ["find", "get", "report", "list_bank_transactions", "list_subscriptions"])
+        #expect(Bundle.main.url(forResource: "tools.mb-1.ondevice", withExtension: "json") == nil,
+                "no per-AI manifest ships")
+        #if canImport(FoundationModels)
+        // Offline (law 12) the same catalog offers exactly its read-only tools.
+        #expect(Set(GLAIOnDeviceTransport.offlineTools(in: box.online).map(\.name))
+                == ["find", "get", "report", "help", "list_bank_transactions", "list_subscriptions"])
+        #endif
     }
 
     /// Every manifest tool is bound, built into the loop, or scheduled for a named later stage —
@@ -53,17 +58,23 @@ struct MBToolboxTests {
         }
     }
 
-    @Test func theOfflineToolboxIsCleanAndReadOnly() throws {
+    @Test func theOneToolboxIsCleanAndOfflineIsReadOnly() throws {
         let box = try MBToolboxHarnessStore.toolbox()
-        #expect(box.onDevice.bindingReport.isClean, "\(box.onDevice.bindingReport)")
-        for entry in box.onDevice.manifest.tools {
-            #expect(box.onDevice.executor(named: entry.name) is any GLAIReadOnlyTool, "\(entry.name)")
-        }
-        // The offline transport's own gate (law 12) accepts this toolbox.
+        #expect(box.online.bindingReport.isClean, "\(box.online.bindingReport)")
         #if canImport(FoundationModels)
-        #expect(throws: Never.self) {
-            _ = try GLAIOnDeviceTransport(toolbox: box.onDevice, instructions: "Read only.", locale: Locale(identifier: "en_US"))
+        // Law 12: what the offline answerer offers is read-only, and it is decided by the
+        // executor in the one toolbox. No write tool is ever in that list.
+        let offline = GLAIOnDeviceTransport.offlineTools(in: box.online)
+        #expect(!offline.isEmpty)
+        for entry in offline {
+            #expect(box.online.executor(named: entry.name) is any GLAIReadOnlyTool, "\(entry.name)")
         }
+        for name in ["save_customer", "create_estimate", "create_invoice", "record_payment", "delete", "send"] {
+            #expect(box.online.executor(named: name) != nil, "\(name) is in the one catalog")
+            #expect(!offline.contains { $0.name == name }, "\(name) is never offered offline")
+        }
+        // The offline answerer is built on the one toolbox.
+        _ = GLAIOnDeviceTransport(toolbox: box.online, instructions: "Read only.", locale: Locale(identifier: "en_US"))
         #endif
     }
 

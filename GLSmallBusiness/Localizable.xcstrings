@@ -2153,6 +2153,54 @@
         }
       }
     },
+    "About Appearance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About Appearance"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca de la apariencia"
+          }
+        }
+      }
+    },
+    "About Language": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About Language"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca del idioma"
+          }
+        }
+      }
+    },
+    "About Security": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About Security"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acerca de la seguridad"
+          }
+        }
+      }
+    },
     "Accept an estimate or create an invoice, then schedule it here.": {
       "localizations": {
         "es": {
@@ -2409,12 +2457,32 @@
         }
       }
     },
+    "Add a subcontractor to track jobs and 1099 payments.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agregue un subcontratista para rastrear trabajos y pagos 1099."
+          }
+        }
+      }
+    },
     "Add a “Pay this invoice” button so your customer can pay by card. Starts from your Get Paid default; you can change it here or later.": {
       "localizations": {
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Agrega un botón de “Pagar esta factura” para que tu cliente pueda pagar con tarjeta. Parte de tu ajuste por defecto en Recibir pagos; puedes cambiarlo aquí o después."
+          }
+        }
+      }
+    },
+    "Add an employee to track hours, jobs, and paychecks.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agregue un empleado para rastrear horas, trabajos y nóminas."
           }
         }
       }
@@ -2758,6 +2826,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Agrega el nombre, teléfono y correo de tu negocio en Menú → Detalles de mi negocio antes de enviar una factura."
+          }
+        }
+      }
+    },
+    "Add your first customer to start tracking jobs and contracts.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agregue su primer cliente para comenzar a rastrear trabajos y contratos."
           }
         }
       }
@@ -3396,6 +3474,22 @@
         }
       }
     },
+    "Annualized": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annualized"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anualizado"
+          }
+        }
+      }
+    },
     "Another Device": {
       "extractionState": "manual",
       "localizations": {
@@ -3997,6 +4091,16 @@
         }
       }
     },
+    "Automate your cash flow with live bank sync, automatic expense classification, and recurring subscription tracking.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatice su flujo de caja con sincronización bancaria en vivo, clasificación automática de gastos y seguimiento de suscripciones recurrentes."
+          }
+        }
+      }
+    },
     "Automated Payment Reminders": {
       "localizations": {
         "es": {
@@ -4013,6 +4117,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recordatorios automáticos"
+          }
+        }
+      }
+    },
+    "Automatic income and expense tagging linked directly to your customer jobs, contracts, and taxes.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etiquetado automático de ingresos y gastos vinculado directamente a los trabajos, contratos e impuestos de sus clientes."
           }
         }
       }
@@ -4195,6 +4309,22 @@
         }
       }
     },
+    "Bank Sync Notice": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bank Sync Notice"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aviso de sincronización bancaria"
+          }
+        }
+      }
+    },
     "Bank transfer": {
       "localizations": {
         "es": {
@@ -4326,6 +4456,32 @@
         }
       }
     },
+    "Branding & Documents": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Branding & Documents"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marca y documentos"
+          }
+        }
+      }
+    },
+    "Bring Your Own Key AI (Claude, ChatGPT, Gemini, Meta Muse)": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA con clave propia (Claude, ChatGPT, Gemini, Meta Muse)"
+          }
+        }
+      }
+    },
     "Built-In · Free": {
       "localizations": {
         "en": {
@@ -4390,6 +4546,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Información del negocio"
+          }
+        }
+      }
+    },
+    "Business Subscription": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Business Subscription"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suscripción del negocio"
           }
         }
       }
@@ -4538,6 +4710,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "CONTRATO"
+          }
+        }
+      }
+    },
+    "Cadence": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cadence"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frecuencia"
           }
         }
       }
@@ -4799,6 +4987,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Catálogo y precios"
+          }
+        }
+      }
+    },
+    "Categories": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categories"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categorías"
           }
         }
       }
@@ -5861,22 +6065,22 @@
         }
       }
     },
-    "Complimentary": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cortesía"
-          }
-        }
-      }
-    },
     "Compliance Documents": {
       "localizations": {
         "es": {
           "stringUnit": {
             "state": "translated",
             "value": "Documentos de cumplimiento"
+          }
+        }
+      }
+    },
+    "Complimentary": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cortesía"
           }
         }
       }
@@ -6065,6 +6269,33 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bancos y dinero conectados"
+          }
+        }
+      }
+    },
+    "Connected Banks & Money requires an active Connected Banks & Money subscription.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connected Banks & Money requires an active Connected Banks & Money subscription."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bancos Conectados y Dinero requiere una suscripción activa a Bancos Conectados y Dinero."
+          }
+        }
+      }
+    },
+    "Connected banks & live Plaid money tracking": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bancos conectados y seguimiento de dinero en vivo con Plaid"
           }
         }
       }
@@ -6622,6 +6853,16 @@
         }
       }
     },
+    "Couldn’t Restore Purchases": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudieron restaurar las compras"
+          }
+        }
+      }
+    },
     "Couldn’t Unlock Data": {
       "extractionState": "manual",
       "localizations": {
@@ -6733,6 +6974,22 @@
         }
       }
     },
+    "Couldn’t connect to your bank right now. Please try again in a moment.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t connect to your bank right now. Please try again in a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo conectar con tu banco en este momento. Inténtalo de nuevo en un momento."
+          }
+        }
+      }
+    },
     "Couldn’t create the PDF. Try again.": {
       "extractionState": "migrated",
       "localizations": {
@@ -6838,6 +7095,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se pudieron eliminar los datos de esa app"
+          }
+        }
+      }
+    },
+    "Couldn’t finish connecting your bank. Please try again.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t finish connecting your bank. Please try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo terminar de conectar tu banco. Inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "Couldn’t finish linking your bank account. Please try again.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t finish linking your bank account. Please try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo terminar de vincular tu cuenta bancaria. Inténtalo de nuevo."
           }
         }
       }
@@ -7062,6 +7351,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "No se pudo canjear ese código. Revisa el código y tu conexión, luego intenta de nuevo."
+          }
+        }
+      }
+    },
+    "Couldn’t refresh bank transactions right now. Please try again in a moment.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t refresh bank transactions right now. Please try again in a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudieron actualizar las transacciones bancarias en este momento. Inténtalo de nuevo en un momento."
           }
         }
       }
@@ -8850,6 +9155,16 @@
         }
       }
     },
+    "Detect active recurring vendor charges and identify unneeded subscriptions to reduce overhead.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detecte cobros recurrentes de proveedores e identifique suscripciones innecesarias para reducir gastos generales."
+          }
+        }
+      }
+    },
     "Dictate": {
       "extractionState": "migrated",
       "localizations": {
@@ -8926,6 +9241,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Desconectar banco"
+          }
+        }
+      }
+    },
+    "Disconnect Bank?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disconnect Bank?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Desconectar banco?"
           }
         }
       }
@@ -9631,6 +9962,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enviar enlace de reseña por correo"
+          }
+        }
+      }
+    },
+    "Email me any time at %@.": {
+      "extractionState": "migrated",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Email me any time at %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escríbeme cuando quieras a %@."
           }
         }
       }
@@ -10500,6 +10848,22 @@
         }
       }
     },
+    "Face ID & Privacy Cover": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID & Privacy Cover"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Face ID y cubierta de privacidad"
+          }
+        }
+      }
+    },
     "Face ID didn’t pass, so that stayed closed.": {
       "localizations": {
         "es": {
@@ -10978,6 +11342,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "MIEMBRO DE GOLD LIFE"
+          }
+        }
+      }
+    },
+    "General": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
           }
         }
       }
@@ -12853,6 +13233,33 @@
         }
       }
     },
+    "Live Bank Connections": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conexiones bancarias en vivo"
+          }
+        }
+      }
+    },
+    "Live bank connections are temporarily unavailable while our bank service is being configured. Please try again soon.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Live bank connections are temporarily unavailable while our bank service is being configured. Please try again soon."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las conexiones bancarias en vivo no están disponibles temporalmente mientras configuramos el servicio bancario. Inténtalo de nuevo pronto."
+          }
+        }
+      }
+    },
     "Loading…": {
       "extractionState": "migrated",
       "localizations": {
@@ -13007,6 +13414,22 @@
         }
       }
     },
+    "Logo, Business Info & Numbering": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logo, Business Info & Numbering"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logotipo, datos del negocio y numeración"
+          }
+        }
+      }
+    },
     "Lump sum": {
       "localizations": {
         "es": {
@@ -13100,6 +13523,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mapas"
+          }
+        }
+      }
+    },
+    "Maps, Messages & Email": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maps, Messages & Email"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mapas, mensajes y correo"
           }
         }
       }
@@ -13426,6 +13865,22 @@
         }
       }
     },
+    "Money View": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Money View"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vista de dinero"
+          }
+        }
+      }
+    },
     "Month": {
       "localizations": {
         "es": {
@@ -13453,6 +13908,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Límite mensual de IA alcanzado · se renueva el %@"
+          }
+        }
+      }
+    },
+    "Monthly Burn": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly Burn"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto mensual"
           }
         }
       }
@@ -14036,6 +14507,22 @@
         }
       }
     },
+    "Next Expected": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next Expected"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo cobro"
+          }
+        }
+      }
+    },
     "Next month": {
       "localizations": {
         "es": {
@@ -14109,6 +14596,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aún no hay actividad"
+          }
+        }
+      }
+    },
+    "No bank accounts connected yet.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No bank accounts connected yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay cuentas bancarias conectadas."
           }
         }
       }
@@ -14318,6 +14821,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sin conexión a internet. Revisa tu conexión Wi-Fi o de datos móviles e inténtalo de nuevo."
+          }
+        }
+      }
+    },
+    "No internet connection. Please check your connection and try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No internet connection. Please check your connection and try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin conexión a internet. Revisa tu conexión e inténtalo de nuevo."
           }
         }
       }
@@ -15726,6 +16246,26 @@
         }
       }
     },
+    "PRO": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRO"
+          }
+        }
+      }
+    },
+    "PRO FEATURE": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FUNCIÓN PRO"
+          }
+        }
+      }
+    },
     "PROJECT": {
       "localizations": {
         "es": {
@@ -16576,6 +17116,22 @@
         }
       }
     },
+    "Preferences": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferences"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preferencias"
+          }
+        }
+      }
+    },
     "Prepared for": {
       "localizations": {
         "es": {
@@ -16970,6 +17526,16 @@
         }
       }
     },
+    "Purchases Restored": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compras restauradas"
+          }
+        }
+      }
+    },
     "Purchases restored": {
       "localizations": {
         "es": {
@@ -17009,6 +17575,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cant."
+          }
+        }
+      }
+    },
+    "Quarterly": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quarterly"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trimestral"
           }
         }
       }
@@ -17149,6 +17731,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recibos, incluido su texto escaneado cuando preguntas por uno"
+          }
+        }
+      }
+    },
+    "Reconnect Bank": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconnect Bank"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconectar banco"
           }
         }
       }
@@ -17340,6 +17938,22 @@
         }
       }
     },
+    "Refresh": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar"
+          }
+        }
+      }
+    },
     "Refreshing bank transactions": {
       "localizations": {
         "en": {
@@ -17436,6 +18050,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Eliminar %@"
+          }
+        }
+      }
+    },
+    "Remove %@ from Connected Banks & Money?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove %@ from Connected Banks & Money?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Quitar %@ de Bancos conectados y dinero?"
           }
         }
       }
@@ -18791,6 +19421,22 @@
         }
       }
     },
+    "Scheduling & Workdays": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scheduling & Workdays"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agenda y días laborales"
+          }
+        }
+      }
+    },
     "Scheduling a job": {
       "localizations": {
         "es": {
@@ -19005,6 +19651,38 @@
         }
       }
     },
+    "Search subscriptions": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search subscriptions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar suscripciones"
+          }
+        }
+      }
+    },
+    "Search transactions": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search transactions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar transacciones"
+          }
+        }
+      }
+    },
     "Search vendor, customer, notes": {
       "extractionState": "migrated",
       "localizations": {
@@ -19029,6 +19707,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Clave secreta de recuperación"
+          }
+        }
+      }
+    },
+    "Securely link 10,000+ financial institutions via Plaid to stream real-time account balances and transactions.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vincule de forma segura más de 10,000 instituciones financieras mediante Plaid para transmitir saldos y transacciones en tiempo real."
           }
         }
       }
@@ -19115,6 +19803,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Selecciona un subcontratista"
+          }
+        }
+      }
+    },
+    "Select a Subscription": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select a Subscription"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecciona una suscripción"
+          }
+        }
+      }
+    },
+    "Select a Transaction": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select a Transaction"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecciona una transacción"
           }
         }
       }
@@ -19719,6 +20439,16 @@
         }
       }
     },
+    "Show Calendar": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar calendario"
+          }
+        }
+      }
+    },
     "Show Recovery Key": {
       "extractionState": "manual",
       "localizations": {
@@ -19850,6 +20580,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vuelve a iniciar sesión para usar el asistente."
+          }
+        }
+      }
+    },
+    "Sign in to connect a live bank account.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in to connect a live bank account."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inicia sesión para conectar una cuenta bancaria en vivo."
           }
         }
       }
@@ -20092,6 +20838,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cerrar sesión elimina de este dispositivo sus chats, recuerdos guardados, Alma de la IA, historial de gasto y cualquier clave de conexión de IA no guardada."
+          }
+        }
+      }
+    },
+    "Smart Categorization": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Categorización inteligente"
           }
         }
       }
@@ -20825,6 +21581,40 @@
         }
       }
     },
+    "Subscribe to connect live bank feeds via Plaid, track automated income and expenses, and manage subscriptions.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscribe to connect live bank feeds via Plaid, track automated income and expenses, and manage subscriptions."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suscríbase para conectar cuentas bancarias en vivo con Plaid, registrar ingresos y gastos automáticamente y gestionar suscripciones."
+          }
+        }
+      }
+    },
+    "Subscribe to connect your own Claude, ChatGPT, Gemini, and Meta Muse keys. Apple Intelligence is built-in and free.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscribe to connect your own Claude, ChatGPT, Gemini, and Meta Muse keys. Apple Intelligence is built-in and free."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suscríbase para conectar sus propias claves de Claude, ChatGPT, Gemini y Meta Muse. Apple Intelligence está integrado y es gratis."
+          }
+        }
+      }
+    },
     "Subscription": {
       "localizations": {
         "es": {
@@ -20847,6 +21637,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suscripción %@"
+          }
+        }
+      }
+    },
+    "Subscription Management": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestión de suscripciones"
           }
         }
       }
@@ -22774,6 +23574,23 @@
         }
       }
     },
+    "This Connected Banks & Money subscription is already linked to another Gold Life ID.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This Connected Banks & Money subscription is already linked to another Gold Life ID."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta suscripción de Bancos Conectados y Dinero ya está vinculada a otro Gold Life ID."
+          }
+        }
+      }
+    },
     "This Pro + AI subscription belongs to a different Gold Life ID.": {
       "extractionState": "migrated",
       "localizations": {
@@ -23445,6 +24262,23 @@
         }
       }
     },
+    "Too many bank sync requests right now. Please wait a moment and try again.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Too many bank sync requests right now. Please wait a moment and try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demasiadas solicitudes de sincronización bancaria en este momento. Espera un momento e inténtalo de nuevo."
+          }
+        }
+      }
+    },
     "Total": {
       "localizations": {
         "es": {
@@ -23488,6 +24322,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Totales"
+          }
+        }
+      }
+    },
+    "Track as Subscription": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Track as Subscription"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seguir como suscripción"
           }
         }
       }
@@ -23828,6 +24678,40 @@
         }
       }
     },
+    "Unlock Bring Your Own Key AI": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock Bring Your Own Key AI"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloquee IA con su propia clave"
+          }
+        }
+      }
+    },
+    "Unlock Connected Banks & Money": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock Connected Banks & Money"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloquee Bancos y dinero conectados"
+          }
+        }
+      }
+    },
     "Unlock Data": {
       "extractionState": "manual",
       "localizations": {
@@ -23875,6 +24759,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Método de desbloqueo"
+          }
+        }
+      }
+    },
+    "Unlock Money — Upgrade to Pro": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloquee Dinero — Actualice a Pro"
           }
         }
       }
@@ -25101,6 +25995,22 @@
         }
       }
     },
+    "Workdays, Hours & Holidays": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Workdays, Hours & Holidays"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Días laborales, horario y festivos"
+          }
+        }
+      }
+    },
     "Workers' Comp Certificate": {
       "localizations": {
         "es": {
@@ -25194,6 +26104,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Reporte fiscal de fin de año — %@"
+          }
+        }
+      }
+    },
+    "Yearly": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yearly"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anual"
           }
         }
       }
@@ -25831,6 +26757,23 @@
         }
       }
     },
+    "Your complimentary plan includes Unlimited Business & Sentinel AI. Subscribe to unlock Connected Banks & Money.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your complimentary plan includes Unlimited Business & Sentinel AI. Subscribe to unlock Connected Banks & Money."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Su plan de cortesía incluye Negocio Ilimitado y Sentinel AI. Suscríbase para desbloquear Bancos y dinero conectados."
+          }
+        }
+      }
+    },
     "Your device couldn’t write the change. Free up storage if it’s low, then open the record and try again.": {
       "localizations": {
         "es": {
@@ -26098,6 +27041,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tu suscripción terminó, así que tus registros son de solo lectura. Todo sigue aquí para consultarlo. No se puede agregar, cambiar ni exportar nada hasta que reactives."
+          }
+        }
+      }
+    },
+    "Your subscriptions and purchases have been refreshed.": {
+      "localizations": {
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sus suscripciones y compras se han actualizado."
           }
         }
       }
@@ -27024,281 +27977,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "★  ¿Te gustó trabajar con nosotros?"
-          }
-        }
-      }
-    },
-    "Add a subcontractor to track jobs and 1099 payments.": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agregue un subcontratista para rastrear trabajos y pagos 1099."
-          }
-        }
-      }
-    },
-    "Add an employee to track hours, jobs, and paychecks.": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agregue un empleado para rastrear horas, trabajos y nóminas."
-          }
-        }
-      }
-    },
-    "Add your first customer to start tracking jobs and contracts.": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agregue su primer cliente para comenzar a rastrear trabajos y contratos."
-          }
-        }
-      }
-    },
-    "Automate your cash flow with live bank sync, automatic expense classification, and recurring subscription tracking.": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatice su flujo de caja con sincronización bancaria en vivo, clasificación automática de gastos y seguimiento de suscripciones recurrentes."
-          }
-        }
-      }
-    },
-    "Automatic income and expense tagging linked directly to your customer jobs, contracts, and taxes.": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Etiquetado automático de ingresos y gastos vinculado directamente a los trabajos, contratos e impuestos de sus clientes."
-          }
-        }
-      }
-    },
-    "Bring Your Own Key AI (Claude, ChatGPT, Gemini, Meta Muse)": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "IA con clave propia (Claude, ChatGPT, Gemini, Meta Muse)"
-          }
-        }
-      }
-    },
-    "Connected banks & live Plaid money tracking": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bancos conectados y seguimiento de dinero en vivo con Plaid"
-          }
-        }
-      }
-    },
-    "Couldn’t Restore Purchases": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No se pudieron restaurar las compras"
-          }
-        }
-      }
-    },
-    "Detect active recurring vendor charges and identify unneeded subscriptions to reduce overhead.": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detecte cobros recurrentes de proveedores e identifique suscripciones innecesarias para reducir gastos generales."
-          }
-        }
-      }
-    },
-    "Live Bank Connections": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conexiones bancarias en vivo"
-          }
-        }
-      }
-    },
-    "PRO": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PRO"
-          }
-        }
-      }
-    },
-    "PRO FEATURE": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "FUNCIÓN PRO"
-          }
-        }
-      }
-    },
-    "Purchases Restored": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compras restauradas"
-          }
-        }
-      }
-    },
-    "Securely link 10,000+ financial institutions via Plaid to stream real-time account balances and transactions.": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vincule de forma segura más de 10,000 instituciones financieras mediante Plaid para transmitir saldos y transacciones en tiempo real."
-          }
-        }
-      }
-    },
-    "Show Calendar": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mostrar calendario"
-          }
-        }
-      }
-    },
-    "Smart Categorization": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Categorización inteligente"
-          }
-        }
-      }
-    },
-    "Subscription Management": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gestión de suscripciones"
-          }
-        }
-      }
-    },
-    "Subscribe to connect live bank feeds via Plaid, track automated income and expenses, and manage subscriptions.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Subscribe to connect live bank feeds via Plaid, track automated income and expenses, and manage subscriptions."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suscríbase para conectar cuentas bancarias en vivo con Plaid, registrar ingresos y gastos automáticamente y gestionar suscripciones."
-          }
-        }
-      }
-    },
-    "Subscribe to connect your own Claude, ChatGPT, Gemini, and Meta Muse keys. Apple Intelligence is built-in and free.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Subscribe to connect your own Claude, ChatGPT, Gemini, and Meta Muse keys. Apple Intelligence is built-in and free."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suscríbase para conectar sus propias claves de Claude, ChatGPT, Gemini y Meta Muse. Apple Intelligence está integrado y es gratis."
-          }
-        }
-      }
-    },
-    "Unlock Bring Your Own Key AI": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unlock Bring Your Own Key AI"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desbloquee IA con su propia clave"
-          }
-        }
-      }
-    },
-    "Unlock Connected Banks & Money": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Unlock Connected Banks & Money"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desbloquee Bancos y dinero conectados"
-          }
-        }
-      }
-    },
-    "Unlock Money — Upgrade to Pro": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desbloquee Dinero — Actualice a Pro"
-          }
-        }
-      }
-    },
-    "Your complimentary plan includes Unlimited Business & Sentinel AI. Subscribe to unlock Connected Banks & Money.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your complimentary plan includes Unlimited Business & Sentinel AI. Subscribe to unlock Connected Banks & Money."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Su plan de cortesía incluye Negocio Ilimitado y Sentinel AI. Suscríbase para desbloquear Bancos y dinero conectados."
-          }
-        }
-      }
-    },
-    "Your subscriptions and purchases have been refreshed.": {
-      "localizations": {
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sus suscripciones y compras se han actualizado."
           }
         }
       }

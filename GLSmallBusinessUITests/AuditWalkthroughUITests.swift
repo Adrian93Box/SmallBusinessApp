@@ -166,8 +166,8 @@ final class AuditWalkthroughUITests: GLUITestCase {
         fresh(); if openMenu(), go("Settings") { shot("settings"); scrollShots("settings", pages: 4) }
         fresh(); if openMenu(), go("Settings"), goPrefix("Appearance") { shot("settings-appearance") }
         fresh(); if openMenu(), go("Settings"), goPrefix("Language") { shot("settings-language") }
-        fresh(); if openMenu(), go("Settings"), goPrefix("Work schedule") { shot("settings-work-schedule"); scrollShots("settings-work-schedule", pages: 1) }
-        fresh(); if openMenu(), go("Settings"), goPrefix("Document Messages") { shot("settings-document-messages"); scrollShots("settings-document-messages", pages: 1) }
+        fresh(); if openMenu(), go("Settings"), goPrefix("Scheduling & Workdays"), goPrefix("Work schedule") { shot("settings-work-schedule"); scrollShots("settings-work-schedule", pages: 1) }
+        fresh(); if openMenu(), go("Settings"), goPrefix("Branding & Documents"), goPrefix("Document Messages") { shot("settings-document-messages"); scrollShots("settings-document-messages", pages: 1) }
         fresh(); if openMenu(), go("Subscription"), tapButton("Subscribe") { shot("paywall-subscribe", settle: 5); scrollShots("paywall-subscribe", pages: 2) }
         fresh(); if openMenu(), goPrefix("Gold Life") { shot("gold-life-id", settle: 3); scrollShots("gold-life-id", pages: 2) }
 

@@ -1,17 +1,34 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 echo "🚀 Starting App Store Connect Upload process for Small Business..."
 
-ASC_KEY_ID="2JTL2WV5XC"
-ASC_ISSUER_ID="46562150-20c4-4489-81db-12f330fcf7bc"
+load_env_file() {
+    local file="$1" key value
+    [ -f "$file" ] || return 0
+    while IFS='=' read -r key value || [ -n "$key" ]; do
+        [[ "$key" =~ ^[[:space:]]*# ]] && continue
+        [[ -z "${key// }" ]] && continue
+        key="$(echo "$key" | xargs)"
+        [[ "$key" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]] || continue
+        value="${value%\"}"; value="${value#\"}"
+        value="${value%'}"; value="${value#'}"
+        if [ -z "${!key:-}" ]; then
+            export "$key=$value"
+        fi
+    done < "$file"
+}
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+cd "$REPO_ROOT"
+load_env_file "$REPO_ROOT/secrets/tokens.env"
+load_env_file "$HOME/.appstoreconnect/tokens.env"
 
-# 1. Load secrets if present, or fallback to user keys
-if [ -f "secrets/tokens.env" ]; then
-    export $(grep -v '^#' secrets/tokens.env | xargs)
-fi
+: "${ASC_KEY_ID:?Missing ASC_KEY_ID (environment, secrets/tokens.env or ~/.appstoreconnect/tokens.env)}"
+: "${ASC_ISSUER_ID:?Missing ASC_ISSUER_ID (environment, secrets/tokens.env or ~/.appstoreconnect/tokens.env)}"
+: "${ASC_TEAM_ID:=T77JR9H9SB}"
 
-KEY_FILE="/Users/adriangutierrez/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8"
+KEY_FILE="${ASC_PRIVATE_KEY_PATH:-$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8}"
 if [ ! -f "$KEY_FILE" ] && [ -f "$PWD/secrets/AuthKey_${ASC_KEY_ID}.p8" ]; then
     KEY_FILE="$PWD/secrets/AuthKey_${ASC_KEY_ID}.p8"
 fi
@@ -20,6 +37,7 @@ if [ ! -f "$KEY_FILE" ]; then
     echo "❌ Error: API Key file $KEY_FILE not found!"
     exit 1
 fi
+export ASC_KEY_ID ASC_ISSUER_ID ASC_TEAM_ID
 
 BUILD_DIR="build"
 ARCHIVE_PATH="$BUILD_DIR/GLSmallBusiness.xcarchive"
@@ -54,6 +72,10 @@ xcodebuild clean archive \
     -destination "generic/platform=iOS" \
     -configuration Release \
     -archivePath "$ARCHIVE_PATH" \
+    -allowProvisioningUpdates \
+    -authenticationKeyPath "$KEY_FILE" \
+    -authenticationKeyID "$ASC_KEY_ID" \
+    -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
     -quiet
 
 echo "📦 Exporting the .ipa..."
@@ -83,4 +105,4 @@ xcrun altool --upload-app \
     --apiIssuer "$ASC_ISSUER_ID"
 
 echo "✅ Binary uploaded. Initiating automatic push to TestFlight..."
-python3 "$(dirname "$0")/distribute_testflight.py" --app mb --version "$BUILD_VERSION"
+python3 "$SCRIPT_DIR/distribute_testflight.py" --app mb --version "$BUILD_VERSION" --key-id "$ASC_KEY_ID" --issuer-id "$ASC_ISSUER_ID" --key-path "$KEY_FILE"

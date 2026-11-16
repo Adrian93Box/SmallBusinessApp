@@ -22,12 +22,12 @@ Generates:
 import glob, html, json, os, shutil, sys
 from PIL import Image, ImageOps
 
-AI_TOOLS = os.path.expanduser('~/Documents/Github/AI-Tools/website-kit')
+AI_TOOLS = os.path.expanduser('~/Documents/github repos/AI-Tools/website-kit')
 sys.path.insert(0, AI_TOOLS)
 from frame_screenshots import load_frame, compose, web_width  # noqa: E402
 
-REPO_APP = os.path.expanduser('~/Documents/Github/SmallBusinessApp')
-REPO_WEB = os.path.expanduser('~/Documents/Github/softwarebygl-website')
+REPO_APP = os.path.expanduser('~/Documents/github repos/SmallBusinessApp')
+REPO_WEB = os.path.expanduser('~/Documents/github repos/softwarebygl-website')
 GEMINI_DIR = os.path.join(REPO_APP, 'AppStoreAssets/_gemini-2026-10-16')
 STORE_DIR = os.path.join(REPO_APP, 'AppStoreAssets/Store-2026-10-16')
 CANON_IPHONE_DIR = os.path.join(REPO_APP, 'AppStoreAssets/iPhone')

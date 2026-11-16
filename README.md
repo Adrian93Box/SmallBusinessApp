@@ -79,7 +79,7 @@ Instead of standard full-payload syncing, the application uses an append-only tr
 * Server infrastructure acts solely as a blind zero-knowledge synchronization layer (`ciphertext`, `nonce`, and authentication tag).
 
 ### D. Multi-Platform Adaptive UI Engine
-* **Universal 3-Column Split Standard:** On iPad (`UIDevice.current.userInterfaceIdiom == .pad`), renders a native 3-column split view (`NavigationSplitView`: Sidebar · List · Detail) across all orientations and multitasking configurations.
+* **iPad Split View (Law 10):** On iPad (`UIDevice.current.userInterfaceIdiom == .pad`), renders a native 3-column split view (`NavigationSplitView`: Sidebar · List · Detail) across all orientations and multitasking configurations, because My Business's content fills all three columns.
 * **Adaptive Grid System:** Product and catalog items scale dynamically via adaptive layouts without stretching or pixel clipping across phone and tablet bounds.
 * **Accessibility & Internationalization:** 100% native Dynamic Type compliance and synchronized English/Spanish (`en` / `es`) string catalogs.
 

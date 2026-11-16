@@ -136,18 +136,6 @@ struct AllContractsScreen: View {
                 }
             }
         }
-        .navigationDestination(isPresented: $showingNewContract) {
-            ContractFormScreen()
-        }
-        .navigationDestination(isPresented: $showingNewEstimate) {
-            PickCustomerThenScreen(title: "New estimate") { EstimateFormScreen(customer: $0) }
-        }
-        .navigationDestination(isPresented: $showingNewInvoice) {
-            PickCustomerThenScreen(title: "New invoice") { InvoiceFormScreen(customer: $0) }
-        }
-        .navigationDestination(isPresented: $showingScanReceipt) {
-            AllReceiptsScreen(autoScan: true)
-        }
         .modifier(ContractsTabRootChrome(
             isTabRoot: isTabRoot,
             showingMenu: $showingMenu,
@@ -282,7 +270,23 @@ private struct ContractsTabRootChrome: ViewModifier {
                 }
                 .paywallSheet(isPresented: $showingPaywall)
         } else {
+            // Not the tab root (the iPad list column): the "+" menu in the screen's own toolbar
+            // pushes from here. These four destinations must exist exactly ONCE per stack:
+            // build 117 declared them on the screen as well as above, and on iPhone the
+            // duplicate made "+ → New estimate / invoice / contract / Scan receipt" do nothing.
             content
+                .navigationDestination(isPresented: $showingNewContract) {
+                    ContractFormScreen()
+                }
+                .navigationDestination(isPresented: $showingNewEstimate) {
+                    PickCustomerThenScreen(title: "New estimate") { EstimateFormScreen(customer: $0) }
+                }
+                .navigationDestination(isPresented: $showingNewInvoice) {
+                    PickCustomerThenScreen(title: "New invoice") { InvoiceFormScreen(customer: $0) }
+                }
+                .navigationDestination(isPresented: $showingScanReceipt) {
+                    AllReceiptsScreen(autoScan: true)
+                }
         }
     }
 }

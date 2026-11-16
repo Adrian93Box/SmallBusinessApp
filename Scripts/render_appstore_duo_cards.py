@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
 import os
 import sys
-sys.path.append('/Users/adriangutierrez/Documents/Github/AI-Tools/website-kit')
+_REPO_APP = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+_REPOS_ROOT = os.path.dirname(_REPO_APP)
+sys.path.append(os.path.join(_REPOS_ROOT, 'AI-Tools/website-kit'))
 from frame_screenshots import load_frame, compose
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-out_dir = '/Users/adriangutierrez/Documents/Github/SmallBusinessApp/AppStoreAssets/iPhoneDuo'
+out_dir = os.path.join(_REPO_APP, 'AppStoreAssets/iPhoneDuo')
 os.makedirs(out_dir, exist_ok=True)
 W, H = 2007, 2853
 
-font_inter_path = '/Users/adriangutierrez/Documents/Github/AI-Tools/website-kit/appstore/brand-assets/Inter.ttf'
-font_it_path = '/Users/adriangutierrez/Documents/Github/AI-Tools/website-kit/appstore/brand-assets/Italianno.ttf'
+font_inter_path = os.path.join(_REPOS_ROOT, 'AI-Tools/website-kit/appstore/brand-assets/Inter.ttf')
+font_it_path = os.path.join(_REPOS_ROOT, 'AI-Tools/website-kit/appstore/brand-assets/Italianno.ttf')
 
 font_eyebrow = ImageFont.truetype(font_inter_path, 34)
 font_headline = ImageFont.truetype(font_inter_path, 98)
 font_sub = ImageFont.truetype(font_inter_path, 42)
 font_wm = ImageFont.truetype(font_it_path, 1500)
 
-outer_frame_path = '/Users/adriangutierrez/Documents/Github/AI-Tools/website-kit/frames/official-apple-duo/iPhone Duo - Star White - Outer Closed Portrait.png'
-inner_frame_path = '/Users/adriangutierrez/Documents/Github/AI-Tools/website-kit/frames/official-apple-duo/iPhone Duo - Star White - Inner Open Landscape.png'
+outer_frame_path = os.path.join(_REPOS_ROOT, 'AI-Tools/website-kit/frames/official-apple-duo/iPhone Duo - Star White - Outer Closed Portrait.png')
+inner_frame_path = os.path.join(_REPOS_ROOT, 'AI-Tools/website-kit/frames/official-apple-duo/iPhone Duo - Star White - Inner Open Landscape.png')
 
 frame_data_outer = load_frame(outer_frame_path)
 frame_data_inner = load_frame(inner_frame_path)
@@ -93,7 +95,7 @@ cards_meta = [
         'headline': 'Deep Contact Insight &',
         'headline_g': 'Full History.',
         'sub': 'Complete address history, signed contracts, and one-tap communication.',
-        'raw_shot': '/Users/adriangutierrez/Documents/Github/softwarebygl-website/public/screenshots/ipad-customers-dark.png'
+        'raw_shot': os.path.join(_REPOS_ROOT, 'softwarebygl-website/public/screenshots/ipad-customers-dark.png')
     },
     {
         'id': '03_contracts_home',
@@ -111,7 +113,7 @@ cards_meta = [
         'headline': 'Live Calendar Sync,',
         'headline_g': 'Zero Clashes.',
         'sub': 'Visualize multi-day installations and daily crew assignments across your schedule.',
-        'raw_shot': '/Users/adriangutierrez/Documents/Github/softwarebygl-website/public/screenshots/ipad-calendar-dark.png'
+        'raw_shot': os.path.join(_REPOS_ROOT, 'softwarebygl-website/public/screenshots/ipad-calendar-dark.png')
     },
     {
         'id': '05_estimate',
@@ -129,7 +131,7 @@ cards_meta = [
         'headline': 'Your Business Profile,',
         'headline_g': 'Fully Governed.',
         'sub': 'Brand licensing, tax identification, and Stripe Connect deposit settings in one place.',
-        'raw_shot': '/Users/adriangutierrez/Documents/Github/softwarebygl-website/public/screenshots/ipad-brand-company-dark.png'
+        'raw_shot': os.path.join(_REPOS_ROOT, 'softwarebygl-website/public/screenshots/ipad-brand-company-dark.png')
     },
     {
         'id': '07_income_expenses',
@@ -138,7 +140,7 @@ cards_meta = [
         'headline': 'Track Money In & Out,',
         'headline_g': 'With Precision.',
         'sub': 'Real-time profit tracking, expense categorization, and year-over-year analytics.',
-        'raw_shot': '/Users/adriangutierrez/Documents/Github/softwarebygl-website/public/screenshots/ipad-get-paid-dark.png'
+        'raw_shot': os.path.join(_REPOS_ROOT, 'softwarebygl-website/public/screenshots/ipad-get-paid-dark.png')
     }
 ]
 

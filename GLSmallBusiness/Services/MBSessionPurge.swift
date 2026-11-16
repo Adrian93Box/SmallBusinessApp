@@ -40,6 +40,7 @@ import SwiftData
 import OSLog
 import GoldLifeCloud
 import GoldLifeAI
+import GoldLifeMoney
 
 @MainActor
 enum MBSessionPurge {
@@ -75,7 +76,9 @@ enum MBSessionPurge {
                     stripeTokenService: String = StripeInstallTokenStore.service) {
         consent.reset()
         AISessionPurge.wipeAll(connectionStore: .shared, chatService: .shared)
+        GLSentinelSyncEngine.shared.resetLocalSyncState()
         StripeInstallTokenStore.purgeSession(of: stripeTokenScope, service: stripeTokenService)
+        PlaidOAuthResumeStore.shared.clear()
         UserDefaults.standard.removeObject(forKey: "mb.money.selectedAccountIds")
         store.wipeLocalCopy(appSupport: appSupport)
         clearContents(of: temporary)

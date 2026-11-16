@@ -21,11 +21,8 @@ import GoldLifeCloud
 struct MenuScreen: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openURL) private var openURL
     @Environment(GoldLifeAuth.self) private var auth
-    @State private var mailUnavailable = false
     @State private var showingPaywall = false
-    /// Read for the Gold Life ID card's member words (2026-10-03 audit F74).
     @State private var subscription = SubscriptionManager.shared
 
     private var isGoldLifeMember: Bool {
@@ -33,14 +30,11 @@ struct MenuScreen: View {
                               serverEntitled: subscription.serverEntitled,
                               statusKnown: subscription.statusKnown)
     }
-    /// The gate's "Explore with sample data" session (audit 2026-10-03 F36).
     @ObservedObject private var demo = UserDemoMode.shared
     #if DEBUG
-    /// Only the sign-out warning's UI-test seam reads it (`MBSignOutWarningHarness`).
     @Environment(\.modelContext) private var modelContext
     #endif
 
-    /// The DEBUG UI-test seam is on (never in Release).
     private static var isSignOutWarningHarness: Bool {
         #if DEBUG
         MBSignOutWarningHarness.isRequested
@@ -49,53 +43,22 @@ struct MenuScreen: View {
         #endif
     }
 
-    /// The developer's address (the Software venture alias; never a personal address).
     static let developerEmail = "support@softwarebygl.com"
 
-    /// Where "Message the Developer" goes: the shared mail route (law 84 / PARITY "Contact
-    /// links"), so it opens the person's chosen mail app (Mail or Gmail, Apple Mail when Gmail
-    /// isn't installed) like every other email in the app, never a link built here (audit
-    /// 2026-10-03 F45). Nil only if the address could not be mailed at all.
     static func developerMailDestination(mail: GLMailApp,
                                          canOpen: (URL) -> Bool) -> GLContactDestination? {
         GLContactRoute.destination(for: .email(address: developerEmail),
                                    maps: .appleMaps, messages: .messages, mail: mail, canOpen: canOpen)
     }
 
-    /// Opens the developer email in the chosen mail app, then Apple Mail; when neither opens (no
-    /// mail app on this device), the alert shows the address instead of a dead tap.
-    private func messageTheDeveloper() {
-        guard let destination = Self.developerMailDestination(mail: GLContactAppSettings.shared.mailApp,
-                                                              canOpen: glCanOpenURL) else {
-            mailUnavailable = true
-            return
-        }
-        openURL(destination.primary) { accepted in
-            guard !accepted else { return }
-            guard let fallback = destination.fallback else { mailUnavailable = true; return }
-            openURL(fallback) { opened in
-                if !opened { mailUnavailable = true }
-            }
-        }
-    }
-
-    /// Whether the Gold Life ID card is a member's: a subscriber, a comp or owner account
-    /// (`serverEntitled`), or a status not known yet. The last term is the rule build 88 dropped
-    /// with the old card: a cold launch before StoreKit answers, or no signal, must never strip a
-    /// paying owner's card.
     static func isGoldLifeMember(isSubscribed: Bool, serverEntitled: Bool, statusKnown: Bool) -> Bool {
         isSubscribed || serverEntitled || !statusKnown
     }
 
-    /// Exploring sample data with no account behind it: the Menu's last button is "Exit Sample
-    /// Mode" instead of a greyed-out "Sign out" (audit 2026-10-03 F36).
-    /// A real session always wins (law 43).
     static func isSampleSession(demoActive: Bool, isSignedIn: Bool) -> Bool {
         demoActive && !isSignedIn
     }
 
-    /// Whether the Sign out / Exit Sample Mode button is greyed out. Exit is always available in
-    /// the sample; Sign out waits while sign-in is busy and needs an account to sign out of.
     static func isSignOutDisabled(isSampleSession: Bool, isBusy: Bool, isSignedIn: Bool,
                                   isHarness: Bool) -> Bool {
         guard !isSampleSession else { return false }
@@ -107,20 +70,14 @@ struct MenuScreen: View {
     }
 
     var body: some View {
-        GLMenuScreen(
+        GLMenuScreen(configuration: GLMenuConfiguration(
             isSampleMode: isSampleSession,
             isSignOutDisabled: Self.isSignOutDisabled(isSampleSession: isSampleSession,
                                                       isBusy: auth.isBusy,
                                                       isSignedIn: auth.isSignedIn,
                                                       isHarness: Self.isSignOutWarningHarness),
-            // Signing out wipes this iPhone's copy (law 13), so the alert names the changes not
-            // backed up yet. Counted each time the alert opens, after folding the newest edits
-            // into the outbox (audit 2026-10-03 F12): a count taken when the Menu appeared missed
-            // an edit just saved in Settings or My Business Details.
             signOutMessageProvider: { await MBSessionPurge.currentSignOutMessage() },
             onSignOut: {
-                // Decided when tapped, not when the Menu drew: the sample discards itself and
-                // the gate opens again; nothing is signed out because nobody is signed in.
                 if Self.isSampleSession(demoActive: UserDemoMode.shared.isDemoActive,
                                         isSignedIn: auth.isSignedIn) {
                     UserDemoMode.shared.exitDemo()
@@ -129,11 +86,9 @@ struct MenuScreen: View {
                 guard !Self.isSignOutWarningHarness else { return }
                 Task { await auth.signOut() }
             },
+            developerEmail: Self.developerEmail,
+            developerEmailSubtitle: "Ideas, feedback, or a bug \u{2014} it comes straight to me.",
             personalDestination: {
-                // Sample data shows the fleet's sample person on the card too, matching the
-                // Signature row (MBIdentity).
-                // "Thank you", the letter and GOLD LIFE MEMBER are for members only (PARITY.md,
-                // owner ruling 2026-08-23); a free or lapsed account gets the monogram card.
                 GoldLifeIDScreen(isSampleMode: MBIdentity.shared.isSampleData,
                                  isMember: isGoldLifeMember,
                                  onExitSampleMode: {
@@ -145,124 +100,89 @@ struct MenuScreen: View {
                 })
             },
             customSections: {
-                GLMenuSection("Business") {
-                    NavigationLink {
-                        MyCompanyDetailScreen()
-                    } label: {
-                        GLMenuRow("My Business Details", systemImage: "building.2")
-                    }
-                    NavigationLink {
-                        BusinessProfileHost(placeholderTitle: mbLoc("Documents")) { profile in
-                            AllDocumentsScreen(profile: profile)
-                        }
-                    } label: {
-                        GLMenuRow("Documents", systemImage: "doc.on.doc")
-                    }
-                }
-
-                GLMenuSection("Reports") {
-                    NavigationLink {
-                        StatsScreen()
-                    } label: {
-                        GLMenuRow("Income & Expenses", systemImage: "chart.line.uptrend.xyaxis")
-                    }
-                }
-
-                GLMenuSection("Payments") {
-                    if subscription.isMoneyEntitled {
-                        MoneyMenuRow(isSampleMode: DemoMode.isActive || UserDemoMode.shared.isDemoActive)
-                            .accessibilityIdentifier("menu.connectedBanksAndMoney")
-                            .mbMoneyHostEnvironment()
-                    } else {
-                        NavigationLink {
-                            MoneyLockedScreen(ownsStack: false)
-                        } label: {
-                            HStack {
-                                GLMenuRow("Connected Banks & Money", systemImage: "building.columns.fill")
-                                Spacer()
-                                HStack(spacing: 3) {
-                                    Image(systemName: "lock.fill")
-                                        .font(.system(size: 8))
-                                    Text("PRO")
-                                        .font(.system(size: 9, weight: .bold))
+                AnyView(
+                    Group {
+                        GLMenuSection("Business") {
+                            NavigationLink {
+                                MyCompanyDetailScreen()
+                            } label: {
+                                GLMenuRow("My Business Details", systemImage: "building.2")
+                            }
+                            NavigationLink {
+                                BusinessProfileHost(placeholderTitle: mbLoc("Documents")) { profile in
+                                    AllDocumentsScreen(profile: profile)
                                 }
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Capsule().fill(GLTheme.accent.opacity(0.18)))
-                                .foregroundStyle(GLTheme.accent)
+                            } label: {
+                                GLMenuRow("Documents", systemImage: "doc.on.doc")
                             }
                         }
-                        .accessibilityIdentifier("menu.connectedBanksAndMoney")
-                    }
-                    NavigationLink {
-                        StripeConnectScreen()
-                    } label: {
-                        GLMenuRow("Connect Stripe", systemImage: "building.columns")
-                    }
-                    NavigationLink {
-                        ZelleConnectScreen()
-                    } label: {
-                        GLMenuRow("Connect Zelle", systemImage: "qrcode")
-                    }
-                }
 
-                if MBFeatureFlags.assistantEnabled {
-                    GLAIMenuSection()
-                }
+                        GLMenuSection("Reports") {
+                            NavigationLink {
+                                StatsScreen()
+                            } label: {
+                                GLMenuRow("Income & Expenses", systemImage: "chart.line.uptrend.xyaxis")
+                            }
+                        }
+
+                        GLMenuSection("Payments") {
+                            if subscription.isMoneyEntitled {
+                                MoneyMenuRow(isSampleMode: DemoMode.isActive || UserDemoMode.shared.isDemoActive)
+                                    .accessibilityIdentifier("menu.connectedBanksAndMoney")
+                                    .mbMoneyHostEnvironment()
+                            } else {
+                                NavigationLink {
+                                    MoneyLockedScreen(ownsStack: false)
+                                } label: {
+                                    HStack {
+                                        GLMenuRow("Connected Banks & Money", systemImage: "building.columns.fill")
+                                        Spacer()
+                                        HStack(spacing: 3) {
+                                            Image(systemName: "lock.fill")
+                                                .font(.system(size: 8))
+                                            Text("PRO")
+                                                .font(.system(size: 9, weight: .bold))
+                                        }
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2)
+                                        .background(Capsule().fill(GLTheme.accent.opacity(0.18)))
+                                        .foregroundStyle(GLTheme.accent)
+                                    }
+                                }
+                                .accessibilityIdentifier("menu.connectedBanksAndMoney")
+                            }
+                            NavigationLink {
+                                StripeConnectScreen()
+                            } label: {
+                                GLMenuRow("Connect Stripe", systemImage: "building.columns")
+                            }
+                            NavigationLink {
+                                ZelleConnectScreen()
+                            } label: {
+                                GLMenuRow("Connect Zelle", systemImage: "qrcode")
+                            }
+                        }
+
+                        if MBFeatureFlags.assistantEnabled {
+                            GLAIMenuSection()
+                        }
+                    }
+                )
             },
-            supportRows: {
-                NavigationLink {
-                    WhatsNewScreen()
-                } label: {
-                    GLMenuRow("What’s New", systemImage: "sparkles")
-                }
-                NavigationLink {
-                    HowToScreen()
-                } label: {
-                    GLMenuRow("How To", systemImage: "questionmark.circle")
-                }
-                Button {
-                    messageTheDeveloper()
-                } label: {
-                    GLMenuRow("Message the Developer", systemImage: "envelope",
-                              subtitle: "Ideas, feedback, or a bug \u{2014} it comes straight to me.")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-            },
-            appRows: {
-                NavigationLink {
-                    SubscriptionScreen()
-                } label: {
-                    GLMenuRow("Subscription", systemImage: "checkmark.seal")
-                }
-                NavigationLink {
-                    SettingsScreen()
-                } label: {
-                    GLMenuRow("Settings", systemImage: "gearshape")
-                }
-                NavigationLink {
-                    AboutScreen()
-                } label: {
-                    GLMenuRow("About", systemImage: "info.circle")
-                }
-            },
-            // The standing notices (sample data, offline, lapsed) under the bar: one slot, the
-            // same on every screen (QA 2026-10-03 F34).
-            bannerInset: { MBSystemBannerInset() }
-        )
+            whatsNewDestination: { AnyView(WhatsNewScreen()) },
+            howToDestination: { AnyView(HowToScreen()) },
+            subscriptionDestination: { AnyView(SubscriptionScreen()) },
+            settingsDestination: { AnyView(SettingsScreen()) },
+            aboutDestination: { AnyView(AboutScreen()) },
+            bannerInset: { AnyView(MBSystemBannerInset()) },
+            isBannerActive: MBSystemBannerInset.isShowing
+        ))
         #if DEBUG
         .task {
             guard MBSignOutWarningHarness.isRequested else { return }
             MBSignOutWarningHarness.prepare(modelContext.container)
         }
         #endif
-        .alert("No email app set up", isPresented: $mailUnavailable) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text("Email me any time at support@softwarebygl.com \u{2014} I read every message.")
-        }
         .environment(\.glaiIsBYOKEntitled, subscription.isPaidMember)
         .environment(\.glaiOnUpgrade, { showingPaywall = true })
         .paywallSheet(isPresented: $showingPaywall, context: .byok)
@@ -603,12 +523,8 @@ struct MyCompanyDetailScreen: View {
         // light-only logo no longer vanishes in dark mode.
         let useDark = colorScheme == .dark && profile.logoDataDark != nil
         let data = useDark ? profile.logoDataDark : (profile.logoData ?? profile.logoDataDark)
-        // Resolve the backing for the scheme the SHOWN VARIANT was made for, not the
-        // current one — a light-only logo in dark mode still sits on the light card
-        // it was designed against. (This was computed but unused — the compiler
-        // warning that exposed it.)
         let backing: ColorScheme = useDark ? .dark : (profile.logoData != nil ? .light : .dark)
-        return ZStack {
+        let innerLogo = ZStack {
             if let data, let uiImage = LogoImage.decoded(data) {
                 GLTheme.resolved(GLTheme.background, in: backing)
                 Image(uiImage: uiImage).resizable().scaledToFill()
@@ -621,9 +537,18 @@ struct MyCompanyDetailScreen: View {
         }
         .frame(width: 120, height: 120)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        // No outline HERE (owner clarification 2026-08-30: the stroke he asked
-        // to remove was on this VIEW screen — the logo stands alone; the EDIT
-        // wells keep theirs as a tappable-well affordance).
+
+        // Concentric rounded-square gold frame (Law 18): 120pt logo (r=16) + 8pt inner mat on all
+        // 4 sides = 136pt inner stroke edge (r=24) + 1.5pt high-contrast gold stroke = 139pt outer
+        // edge (r=25.5). Uses frame sizing instead of numeric .padding() to preserve Law 55 scan.
+        return ZStack {
+            RoundedRectangle(cornerRadius: 25.5, style: .continuous)
+                .fill(GLTheme.surface)
+            RoundedRectangle(cornerRadius: 25.5, style: .continuous)
+                .strokeBorder(gold, lineWidth: 1.5)
+            innerLogo
+        }
+        .frame(width: 139, height: 139)
         .frame(maxWidth: .infinity)
     }
 

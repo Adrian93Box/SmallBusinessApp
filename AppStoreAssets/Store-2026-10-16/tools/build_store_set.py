@@ -11,18 +11,18 @@ Inputs:  --captures DIR   (folder with iphone/, ipad/, duo/ subfolders of raw si
 import argparse, glob, html, json, os, shutil, sys
 from PIL import Image
 
-AI_TOOLS = os.path.expanduser('~/Documents/Github/AI-Tools/website-kit')
+AI_TOOLS = os.path.expanduser('~/Documents/github repos/AI-Tools/website-kit')
 sys.path.insert(0, AI_TOOLS)
 from frame_screenshots import load_frame, compose  # noqa: E402
 
-REPO_WEB = os.path.expanduser('~/Documents/Github/softwarebygl-website')
+REPO_WEB = os.path.expanduser('~/Documents/github repos/softwarebygl-website')
 FRAMES = {
     'iphone': os.path.join(REPO_WEB, 'scripts/frames/iphone-17-pro-max-portrait.png'),
     'ipad': os.path.join(REPO_WEB, 'scripts/frames/ipad-pro-13-portrait.png'),
     'duo_dark': os.path.join(AI_TOOLS, 'frames/official-apple-duo/iPhone Duo - Night Sky - Outer Closed Portrait.png'),
     'duo_light': os.path.join(AI_TOOLS, 'frames/official-apple-duo/iPhone Duo - Star White - Outer Closed Portrait.png'),
 }
-IPAD_ASSETS = os.path.expanduser('~/Documents/Github/SmallBusinessApp/AppStoreAssets/iPadAssets')
+IPAD_ASSETS = os.path.expanduser('~/Documents/github repos/SmallBusinessApp/AppStoreAssets/iPadAssets')
 WEBKIT_RUNNER = os.path.expanduser('~/Library/Caches/ms-playwright/webkit-2336/pw_run.sh')
 FONT_INTER = os.path.join(IPAD_ASSETS, 'Inter.ttf')
 FONT_ITALIANNO = os.path.join(IPAD_ASSETS, 'Italianno.ttf')

@@ -19,35 +19,12 @@
 
 import SwiftUI
 import Observation
+import GoldLifeUI
 import GoldLifeID
 
-/// The language PICKER's options — the Gold Life Setting pattern (law 29):
-/// Gold Life Setting → System → explicit values, Gold Life Setting the default.
-/// Distinct from `MBAppLanguage` (the RESOLVED value the whole localization
-/// engine runs on): the pref is what the person chose in the picker, the
-/// resolved value is what that choice means on this device right now.
-nonisolated enum MBLanguagePref: String, CaseIterable, Identifiable {
-    case goldLife, system, en, es
-
-    /// What the PICKER offers (owner ruling 2026-08-30, the three-tier
-    /// hierarchy): Gold Life ID Setting (default) → System → explicit. The
-    /// ACCOUNT's own value is edited on the Gold Life ID screen; an app-level
-    /// pick here is a LOCAL override and never writes the account.
-    static var pickerCases: [MBLanguagePref] { [.goldLife, .system, .en, .es] }
-
-    var id: String { rawValue }
-
-    /// Endonyms never translate; the two "follow something" rows do.
-    var pickerLabel: LocalizedStringKey {
-        switch self {
-        case .goldLife: return "Gold Life ID Setting"
-        case .system: return "System"
-        case .en: return "English"
-        case .es: return "Español"
-        }
-    }
-
-}
+/// The language PICKER's options — shared across the fleet via `GoldLifeUI`'s `GLLanguagePref` (law 29):
+/// Gold Life ID Setting (default) → System → English → Español.
+typealias MBLanguagePref = GLLanguagePref
 
 /// The languages the app offers. English + Spanish only (owner decision 2026-08-21).
 nonisolated enum MBAppLanguage: String, CaseIterable, Identifiable {
@@ -361,8 +338,8 @@ enum MBGoldLifeIDFollow {
     static func accountValue(sessionState: GoldLifeSessionState,
                              identity: GoldLifeIdentity,
                              field: KeyPath<GoldLifeIdentity, String>) -> String? {
-        guard sessionState == .signedIn, identity != .empty else { return nil }
-        return identity[keyPath: field]
+        // One rule for the whole fleet (GoldLifeID): a value only from a signed-in, loaded record.
+        GLIDAppPreferences.loadedAccountValue(sessionState: sessionState, identity: identity, field: field)
     }
 
     static func watch(_ read: @escaping @MainActor @Sendable () -> String?,

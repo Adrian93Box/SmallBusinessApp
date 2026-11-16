@@ -16,6 +16,7 @@ struct SentinelChatListColumn: View {
         GLAIChatSessionsListColumn(
             selectedSessionID: $selectedSessionID,
             title: mbLoc("Sentinel"),
+            isBannerActive: MBSystemBannerInset.isShowing,
             onStopActiveTurn: {
                 MBAssistantSession.shared.controller?.stop()
             },

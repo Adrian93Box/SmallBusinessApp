@@ -23,6 +23,15 @@ extension View {
 struct MBSystemBannerInset: View {
     var offlineVariant: GLOfflineBanner.Variant = .standard
 
+    static var isShowing: Bool {
+        !GLSystemBanners.visible(
+            isSampleData: UserDemoMode.shared.isDemoActive,
+            isOffline: !NetworkMonitor.shared.isConnected,
+            isLapsed: SubscriptionManager.shared.isLapsed,
+            isVaultLocked: GLVaultUnlockCoordinator.shared.isVaultLocked
+        ).isEmpty
+    }
+
     @ObservedObject private var demo = UserDemoMode.shared
     @State private var subscription = SubscriptionManager.shared
     @State private var vaultUnlock = GLVaultUnlockCoordinator.shared

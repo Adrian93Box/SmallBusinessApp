@@ -116,8 +116,7 @@ final class MBAssistantSession {
             connectionStore: .shared,
             chatService: .shared,
             spendTracker: .shared,
-            reliability: .shared,
-            serverFallback: serverTransport
+            reliability: .shared
         )
         self.directTransport = direct
         let configuration = GLAIConversationController.Configuration(
@@ -163,9 +162,10 @@ final class MBAssistantSession {
     private static func onDevice(_ box: MBToolbox) -> (any GLAIOnDeviceAnswering)? {
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
-            return try? GLAIOnDeviceTransport(toolbox: box.onDevice,
-                                              instructions: MBAssistantStrings.onDeviceInstructions,
-                                              locale: MBLocalization.currentLocale)
+            // The one toolbox every AI uses; offline it offers its read-only tools (law 12).
+            return GLAIOnDeviceTransport(toolbox: box.online,
+                                         instructions: MBAssistantStrings.onDeviceInstructions,
+                                         locale: MBLocalization.currentLocale)
         }
         #endif
         return nil

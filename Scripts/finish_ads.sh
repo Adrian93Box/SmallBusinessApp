@@ -9,7 +9,8 @@ done
 
 # Run frame-screenshots.py
 echo "Running frame-screenshots.py..."
-python3 /Users/adriangutierrez/Documents/Github/softwarebygl-website/scripts/frame-screenshots.py
+REPOS_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+python3 "$REPOS_ROOT/softwarebygl-website/scripts/frame-screenshots.py"
 
 # Run generate_all_ads.py
 echo "Running generate_all_ads.py..."

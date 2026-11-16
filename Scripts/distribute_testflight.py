@@ -13,16 +13,59 @@ import time
 import urllib.request
 import urllib.error
 
+from pathlib import Path
+
 try:
     import jwt
 except ImportError:
     print("❌ Error: PyJWT is required. Install via: pip3 install pyjwt cryptography")
     sys.exit(1)
 
-DEFAULT_KEY_ID = "2JTL2WV5XC"
 DEFAULT_ISSUER_ID = "46562150-20c4-4489-81db-12f330fcf7bc"
-DEFAULT_KEY_PATH = os.path.expanduser(f"~/.appstoreconnect/private_keys/AuthKey_{DEFAULT_KEY_ID}.p8")
 DEFAULT_TESTER_EMAIL = "adrian93box@icloud.com"
+
+
+def _load_tokens_env():
+    values = {}
+    for candidate in (Path.cwd() / "secrets/tokens.env", Path.home() / ".appstoreconnect/tokens.env"):
+        if not candidate.is_file():
+            continue
+        for raw in candidate.read_text(encoding="utf-8", errors="replace").splitlines():
+            line = raw.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, val = line.split("=", 1)
+            key = key.strip()
+            val = val.strip().strip('"').strip("'")
+            if key and key not in values:
+                values[key] = val
+    return values
+
+
+_TOKENS_ENV = _load_tokens_env()
+
+
+def env_or_tokens(name, default=None):
+    return os.environ.get(name) or _TOKENS_ENV.get(name) or default
+
+
+def _resolve_credentials(args):
+    key_id = args.key_id or env_or_tokens("ASC_KEY_ID")
+    issuer_id = args.issuer_id or env_or_tokens("ASC_ISSUER_ID", DEFAULT_ISSUER_ID)
+    key_path = args.key_path or env_or_tokens("ASC_PRIVATE_KEY_PATH") or env_or_tokens("ASC_KEY_PATH")
+    keys_dir = Path.home() / ".appstoreconnect/private_keys"
+    if not key_id and keys_dir.is_dir():
+        matches = sorted(keys_dir.glob("AuthKey_*.p8"))
+        if len(matches) == 1:
+            key_id = matches[0].stem.removeprefix("AuthKey_")
+            key_path = key_path or str(matches[0])
+    if not key_path and key_id:
+        key_path = str(keys_dir / f"AuthKey_{key_id}.p8")
+    if not key_id or not key_path:
+        raise RuntimeError(
+            "Missing ASC_KEY_ID / key path. Set ASC_KEY_ID in environment, secrets/tokens.env, or ~/.appstoreconnect/tokens.env."
+        )
+    return key_id, issuer_id, os.path.expanduser(key_path)
 
 APP_MAP = {
     "mb": "6778954606",
@@ -141,12 +184,14 @@ def main():
     parser.add_argument("--version", default=None, help="Build version/number to wait for (e.g. 17)")
     parser.add_argument("--timeout", type=int, default=900, help="Maximum seconds to wait (default: 900)")
     parser.add_argument("--poll-interval", type=int, default=15, help="Poll interval in seconds (default: 15)")
-    parser.add_argument("--key-id", default=DEFAULT_KEY_ID)
-    parser.add_argument("--issuer-id", default=DEFAULT_ISSUER_ID)
-    parser.add_argument("--key-path", default=DEFAULT_KEY_PATH)
-    parser.add_argument("--email", default=DEFAULT_TESTER_EMAIL)
+    parser.add_argument("--key-id", default=env_or_tokens("ASC_KEY_ID"))
+    parser.add_argument("--issuer-id", default=env_or_tokens("ASC_ISSUER_ID", DEFAULT_ISSUER_ID))
+    parser.add_argument("--key-path", default=env_or_tokens("ASC_PRIVATE_KEY_PATH") or env_or_tokens("ASC_KEY_PATH"))
+    parser.add_argument("--email", default=env_or_tokens("ASC_TESTER_EMAIL", DEFAULT_TESTER_EMAIL))
     parser.add_argument("--check-only", action="store_true", help="Check latest build state and exit")
     args = parser.parse_args()
+
+    args.key_id, args.issuer_id, args.key_path = _resolve_credentials(args)
 
     app_key = args.app or detect_app_id()
     if not app_key:

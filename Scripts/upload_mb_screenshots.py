@@ -1,7 +1,8 @@
 import sys, os, time, hashlib, urllib.request, urllib.error
 from PIL import Image
 
-sys.path.insert(0, "/Users/adriangutierrez/Google Drive/My Drive/AI Brain/skills/app-store-ops/scripts")
+_BRAIN = os.environ.get("GL_AI_BRAIN") or os.path.expanduser("~/Library/Mobile Documents/com~apple~CloudDocs/AI Brain")
+sys.path.insert(0, os.path.join(_BRAIN, "skills", "generate-app-store-assets", "scripts"))
 from asc_api import request, upload_operations
 
 VERSION_ID = "405500bf-3e00-42b3-b875-a7600ac6dc8f" # 3.4.0
@@ -90,12 +91,13 @@ def wait_complete(shot_ids, timeout=300):
             time.sleep(4)
     print(f"  Finished: {len(shot_ids) - len(pending)}/{len(shot_ids)} COMPLETE")
 
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 TARGETS = [
     # (display_type, folder, glob_pattern)
-    ("APP_IPHONE_DUO", "/Users/adriangutierrez/Documents/Github/SmallBusinessApp/AppStoreAssets/iPhoneDuo", "*.png"),
-    ("APP_IPAD_PRO_3GEN_129", "/Users/adriangutierrez/Documents/Github/SmallBusinessApp/AppStoreAssets/iPad", "ipad_*.png"),
-    ("APP_IPHONE_65", "/Users/adriangutierrez/Documents/Github/SmallBusinessApp/AppStoreAssets/iPhone-6.5", "iphone_*.png"),
-    ("APP_IPHONE_61", "/Users/adriangutierrez/Documents/Github/SmallBusinessApp/AppStoreAssets/iPhone-6.1", "iphone_*.png")
+    ("APP_IPHONE_DUO", os.path.join(_REPO_ROOT, "AppStoreAssets/iPhoneDuo"), "*.png"),
+    ("APP_IPAD_PRO_3GEN_129", os.path.join(_REPO_ROOT, "AppStoreAssets/iPad"), "ipad_*.png"),
+    ("APP_IPHONE_65", os.path.join(_REPO_ROOT, "AppStoreAssets/iPhone-6.5"), "iphone_*.png"),
+    ("APP_IPHONE_61", os.path.join(_REPO_ROOT, "AppStoreAssets/iPhone-6.1"), "iphone_*.png")
 ]
 
 for loc_id, loc_name in [(en_id, "en-US"), (es_id, "es-MX")]:

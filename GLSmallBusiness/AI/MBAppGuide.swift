@@ -29,15 +29,16 @@ enum MBAppGuide {
       - **Gold Life ID card** (top): personal name, email, phone, address, member status, and saved signature (`MBSignatureRow`).
       - **Business**: **My Business Details** (logo, business name, license #, owner name, contact info, address, W-9 tax classification, reviews link) and **Documents** (**All Documents** hub: estimates, invoices, contracts, change orders, jobs, projects, expenses, price sheet, compliance certificates, W-9, year-end reports).
       - **Reports**: **Income & Expenses** (financial statistics by week, month, quarter, year, or custom dates).
-      - **Money**: **Connected Banks & Money** (link bank accounts via Plaid, refresh transactions, manage merchant categorization rules).
-      - **Payments**: **Connect Stripe** (card payment links on invoices) and **Connect Zelle** (Zelle tag, email, phone, QR code, and default inclusion on invoices).
-      - **AI**: **Connect AI** (BYOK API keys & OAuth for ChatGPT, Claude, Gemini, Muse), **AI Soul** (memories & communication style), and **Spend Meter** (token spend & budget caps).
-      - **Support & App**: **What’s New**, **How To**, **Message the Developer**, **Subscription**, **Settings** (Appearance, Language English/Spanish, App Lock, Work Hours, Document Messages, Price Sheet, Booking overlap toggle), and **About**.
+      - **Payments**: **Connected Banks & Money** (link bank accounts via Plaid, see or disconnect connected banks, and see or delete the saved “Always mark…” rules; needs an active subscription), **Connect Stripe** (card payment links on invoices) and **Connect Zelle** (Zelle tag, email, phone, QR code, and default inclusion on invoices).
+      - **Intelligence**: **Tasks** (reminders and tasks Sentinel runs for the user).
+      - **Support & App**: **What’s New**, **How To**, **Message the Developer**, **Subscription**, **Settings**, and **About**.
+    - **Settings** (Menu → Settings): **General** (Appearance, Language English/Spanish, Default Apps, Security with App Lock) plus one category per feature: **Branding & Documents** (logo and signature on documents and emails, Document Messages), **Scheduling & Workdays** (Book one job at a time, Work schedule), **Money** (Connected Banks & Money) and **Sentinel** (AI Soul, Memories, Connect AI, Spend & Caps, Tool Trust & Audit).
+    - **Set once for every Gold Life app**: AI Soul, the Memory switch, Web Search, Share my approximate location and tool trust levels follow the user's Gold Life ID, so a change here also applies in Sentinel. Device permissions are different: Apple grants permissions such as Location to each app separately, so each app asks for its own, and no app can grant one for another.
 
     ## AI Keys, Sync & Privacy
     - **Save API Key** (a switch in the Connect AI sheet, off by default): off, the key is held in memory for this sign-in only and is gone when the user signs out or the app closes. On, it is saved encrypted in the user's iCloud Keychain for their Gold Life ID, so it is available in other Gold Life apps (such as Sentinel) and on their other Apple devices signed in to the same iCloud account with iCloud Keychain on (Apple devices only). Gold Life servers never receive or store AI keys; a key is sent only to its own AI company.
     - Disconnecting an AI in Connect AI deletes its saved key everywhere. Deleting the Gold Life ID deletes all saved keys. Signing out keeps saved keys in the Keychain and removes unsaved ones.
-    - Business records (customers, contracts, invoices and the rest) are backed up to the user's Gold Life account and come back on sign-in; AI chats, AI Soul memories and spend history stay on the device.
+    - Business records (customers, contracts, invoices and the rest) are backed up to the user's Gold Life account and come back on sign-in; AI Soul and saved memories sync end-to-end encrypted with the Gold Life ID; AI spend history stays on the device.
     - When a message to an AI fails, the app tells the user the real reason (key rejected or expired, billing or credit needed, rate limit, servers busy, AI not available in their region or network, or no internet). Never guess a different cause.
 
     ## Core Workflows & Tools
@@ -97,15 +98,16 @@ enum MBAppGuide {
       - **Tarjeta Gold Life ID**: nombre personal, correo, teléfono, dirección, membresía y firma guardada.
       - **Negocio**: **Detalles de mi negocio** y **Documentos** (**Todos los documentos**: presupuestos, facturas, contratos, órdenes de cambio, trabajos, proyectos, gastos, lista de precios, certificados y W-9).
       - **Informes**: **Ingresos y gastos** (estadísticas financieras).
-      - **Dinero**: **Bancos conectados y dinero** (vincular cuentas bancarias mediante Plaid, actualizar transacciones y administrar reglas de comerciantes).
-      - **Pagos**: **Conectar Stripe** (pagos con tarjeta) y **Conectar Zelle** (usuario/tag, correo, teléfono, código QR y activación predeterminada en facturas).
-      - **IA**: **Conectar IA**, **Alma de IA** y **Medidor de gasto**.
-      - **Soporte y App**: **Novedades**, **Cómo usar**, **Mensaje al desarrollador**, **Suscripción**, **Configuración** (Apariencia, Idioma Inglés/Español en vivo, Bloqueo de app, Horario laboral, Mensajes de documentos) y **Acerca de**.
+      - **Pagos**: **Bancos y dinero conectados** (vincular cuentas bancarias mediante Plaid, ver o desconectar bancos conectados, y ver o eliminar las reglas guardadas de “Marcar siempre…”; requiere una suscripción activa), **Conectar Stripe** (pagos con tarjeta) y **Conectar Zelle** (usuario/tag, correo, teléfono, código QR y activación predeterminada en facturas).
+      - **Inteligencia**: **Tareas** (recordatorios y tareas que Sentinel ejecuta para el usuario).
+      - **Soporte y App**: **Novedades**, **Guías**, **Escribir al desarrollador**, **Suscripción**, **Ajustes** y **Acerca de**.
+    - **Ajustes** (Menú → Ajustes): **General** (Apariencia, Idioma Inglés/Español, Apps predeterminadas, Seguridad con bloqueo de la app) y una categoría por función: **Marca y documentos** (logo y firma en documentos y correos, Mensajes de documentos), **Agenda y días laborales** (Agenda un trabajo a la vez, Horario de trabajo), **Dinero** (Bancos y dinero conectados) y **Sentinel** (Alma de IA, Memorias, Conectar IA, Gasto y límites, Confianza y auditoría).
+    - **Se configura una vez para todas las apps de Gold Life**: el Alma de IA, el interruptor de Memoria, Búsqueda web, Compartir mi ubicación aproximada y los niveles de confianza de las herramientas siguen al Gold Life ID del usuario, así que un cambio aquí también se aplica en Sentinel. Los permisos del dispositivo son distintos: Apple concede permisos como Ubicación a cada app por separado, así que cada app pide el suyo, y ninguna app puede concederlo por otra.
 
     ## Claves de IA, sincronización y privacidad
     - **Guardar clave de API** (un interruptor en la hoja de Conectar IA, apagado de forma predeterminada): apagado, la clave se mantiene solo en memoria durante esta sesión y desaparece al cerrar sesión o al cerrar la app. Encendido, se guarda cifrada en el Llavero de iCloud del usuario para su Gold Life ID, así que está disponible en otras apps de Gold Life (como Sentinel) y en sus otros dispositivos Apple con la misma cuenta de iCloud y el Llavero de iCloud activado (solo dispositivos Apple). Los servidores de Gold Life nunca reciben ni guardan claves de IA; una clave solo se envía a su propia empresa de IA.
     - Desconectar una IA en Conectar IA elimina su clave guardada en todas partes. Eliminar el Gold Life ID elimina todas las claves guardadas. Cerrar sesión conserva las claves guardadas en el Llavero y elimina las que no se guardaron.
-    - Los registros del negocio (clientes, contratos, facturas y demás) se respaldan en la cuenta Gold Life del usuario y regresan al iniciar sesión; los chats de IA, las memorias del Alma de IA y el historial de gasto se quedan en el dispositivo.
+    - Los registros del negocio (clientes, contratos, facturas y demás) se respaldan en la cuenta Gold Life del usuario y regresan al iniciar sesión; el Alma de IA y las memorias guardadas se sincronizan cifradas de extremo a extremo con el Gold Life ID; el historial de gasto de IA se queda en el dispositivo.
     - Cuando falla un mensaje a una IA, la app le dice al usuario el motivo real (clave rechazada o vencida, falta de facturación o crédito, límite de uso, servidores ocupados, IA no disponible en su región o red, o sin internet). Nunca adivines otra causa.
 
     ## Flujos y Herramientas Principales

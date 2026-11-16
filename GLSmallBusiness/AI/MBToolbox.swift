@@ -2,14 +2,17 @@
 //  MBToolbox.swift
 //  GLSmallBusiness — AI
 //
-//  The My Business toolbox (toolset mb-1): the two manifests the app ships in its bundle
-//  (`tools.mb-1.json` — the server keeps a byte-identical copy — and `tools.mb-1.ondevice.json`),
-//  each loaded through GoldLifeAI's `GLAIToolbox`, with this app's executors bound by name.
+//  The My Business toolbox (toolset mb-1): the ONE manifest the app ships in its bundle
+//  (`tools.mb-1.json`), loaded through GoldLifeAI's `GLAIToolbox`, with this app's executors
+//  bound by name. It is the one tool catalog every AI is handed the same way — ChatGPT, Claude,
+//  Gemini, Muse and Apple Intelligence (owner ruling 2026-11-15). There is no second, on-device
+//  manifest and no per-AI list.
 //
 //  Every executor takes its summary and parameters FROM its manifest entry: the manifest is the
-//  one source of truth (AI/README.md), so a tool can't describe itself differently from what the
-//  server declares. The same read executors serve both toolboxes; on device the loop passes an
-//  output budget (`GLAIToolContext.outputCharacterLimit`) and they answer shorter.
+//  one source of truth (AI/README.md), so a tool can't describe itself differently for one AI.
+//  Offline (law 12, read-only) the on-device answerer offers only the executors that adopt
+//  `GLAIReadOnlyTool`, passes an output budget (`GLAIToolContext.outputCharacterLimit`) and they
+//  answer shorter.
 //
 //  Every manifest tool is bound now (stage 4): the read tools, the core writes, the five areas'
 //  writes, and the six hand-offs the host presents. `scheduled` is empty and `MBToolboxTests`
@@ -27,7 +30,6 @@ nonisolated enum MBToolboxError: Error, Equatable {
 final class MBToolbox {
     static let toolset = "mb-1"
     static let onlineManifestName = "tools.mb-1"
-    static let onDeviceManifestName = "tools.mb-1.ondevice"
 
     /// The last stage whose tools are ALL bound (see the header). Stage 4 is the finished toolbox.
     static let buildStage = 4
@@ -36,20 +38,18 @@ final class MBToolbox {
     /// `undo_last_request` and `load_tools` are built into the conversation controller and never listed.
     static let scheduled: [String: Int] = [:]
 
+    /// The one toolbox: every AI, online and offline, is handed tools from this catalog.
     let online: GLAIToolbox
-    let onDevice: GLAIToolbox
 
     init(environment: MBToolEnvironment, bundle: Bundle = .main) throws {
         // `GLAIToolbox(manifestURL:)` reads local files only (law 59).
         online = try GLAIToolbox(manifestURL: Self.manifestURL(Self.onlineManifestName, in: bundle))
-        onDevice = try GLAIToolbox(manifestURL: Self.manifestURL(Self.onDeviceManifestName, in: bundle))
         online.bind(Self.readTools(for: online.manifest, environment: environment))
         online.bind(Self.writeTools(for: online.manifest, environment: environment))
         online.bind(Self.areaTools(for: online.manifest, environment: environment))
         online.bind(Self.handoffTools(for: online.manifest, environment: environment))
-        // The offline toolbox never gets a write tool (law 12, and `GLAIOnDeviceTransport` refuses
-        // an executor that isn't read-only).
-        onDevice.bind(Self.readTools(for: onDevice.manifest, environment: environment))
+        // Offline never runs a write tool (law 12): `GLAIOnDeviceTransport` offers only the
+        // executors that adopt `GLAIReadOnlyTool`, taken from this same toolbox.
     }
 
     static func manifestURL(_ name: String, in bundle: Bundle) throws -> URL {
